@@ -159,6 +159,14 @@ textarea {
   animation: heroReveal 0.9s ease forwards;
 }
 
+.hero-copy {
+  max-width: 640px;
+}
+
+.hero-eyebrow {
+  margin-bottom: 14px;
+}
+
 .hero-copy h1 {
   margin: 18px 0;
   max-width: 11ch;
@@ -195,7 +203,23 @@ textarea {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin: 28px 0 34px;
+  margin: 28px 0 28px;
+}
+
+.hero-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.hero-highlights span {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  border: 1px solid var(--button-secondary-border);
+  color: var(--pill-text);
+  font-size: 0.92rem;
 }
 
 .social-links {
@@ -205,7 +229,7 @@ textarea {
 }
 
 .hero-social-links {
-  margin-bottom: 34px;
+  margin-bottom: 28px;
 }
 
 .nav-social-links {
@@ -222,23 +246,60 @@ textarea {
   background: var(--social-bg);
   border: 1px solid var(--button-secondary-border);
   color: var(--text);
+  font-weight: 700;
+  font-size: 1.05rem;
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
   transition:
     transform 0.25s ease,
     background 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .social-link:hover {
   transform: translateY(-4px) rotateX(6deg);
   background: rgba(100, 244, 214, 0.14);
   border-color: rgba(100, 244, 214, 0.32);
+  box-shadow: 0 18px 38px rgba(100, 244, 214, 0.16);
 }
 
 .social-link svg {
   width: 20px;
   height: 20px;
   fill: currentColor;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hero-stat-card {
+  display: grid;
+  gap: 6px;
+  padding: 18px 16px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, var(--surface-highlight), var(--surface-soft));
+  border: 1px solid var(--button-secondary-border);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(14px);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.hero-stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(100, 244, 214, 0.28);
+}
+
+.hero-stat-card strong {
+  font-size: 1rem;
+}
+
+.hero-stat-card span {
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.92rem;
 }
 
 .button-primary,
@@ -273,6 +334,7 @@ textarea {
 }
 
 .hero-visual {
+  position: relative;
   min-height: 520px;
   display: flex;
   align-items: center;
@@ -293,6 +355,7 @@ textarea {
   border: 1px solid var(--button-secondary-border);
   transform: translateZ(45px);
   box-shadow: var(--shadow);
+  animation: floatCore 8.5s ease-in-out infinite;
 }
 
 .hero-core span {
@@ -346,6 +409,12 @@ textarea {
   bottom: 72px;
   left: 22px;
   animation: floatCard 6.2s ease-in-out infinite reverse;
+}
+
+.hero-floating-side {
+  top: 50%;
+  right: 2px;
+  animation: floatCard 5.6s ease-in-out infinite;
 }
 
 .navbar-inline {
@@ -406,6 +475,10 @@ textarea {
 .nav-items a:hover {
   color: var(--text);
   transform: translateY(-2px);
+}
+
+.nav-items a.nav-link-active {
+  color: var(--text);
 }
 
 .theme-switch {
@@ -663,8 +736,8 @@ textarea {
   opacity: 0;
   transform: translateY(48px) scale(0.98);
   transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
+    opacity 0.8s ease var(--reveal-delay, 0ms),
+    transform 0.8s ease var(--reveal-delay, 0ms);
 }
 
 .section-visible {
@@ -703,6 +776,16 @@ textarea {
   }
 }
 
+@keyframes floatCore {
+  0%,
+  100% {
+    transform: translateY(0) translateZ(45px);
+  }
+  50% {
+    transform: translateY(-10px) translateZ(45px);
+  }
+}
+
 @keyframes spin3d {
   from {
     transform: rotateX(72deg) rotateY(0deg);
@@ -728,6 +811,10 @@ textarea {
   .hero-visual {
     min-height: 420px;
   }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -745,6 +832,10 @@ textarea {
   .hero-copy h1 {
     max-width: none;
     font-size: clamp(2.8rem, 13vw, 4.4rem);
+  }
+
+  .hero-highlights {
+    gap: 10px;
   }
 
   .section-shell {
@@ -778,6 +869,12 @@ textarea {
 
   .hero-floating-bottom {
     left: 10px;
+  }
+
+  .hero-floating-side {
+    top: auto;
+    right: auto;
+    bottom: 8px;
   }
 }
 
